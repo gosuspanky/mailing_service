@@ -10,6 +10,8 @@ class Customer(models.Model):
 
     company_name = models.CharField(max_length=50, verbose_name='имя компании', **NULLABLE)
 
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE, **NULLABLE, verbose_name='автор')
+
     def __str__(self):
         return f'{self.first_name} - {self.email}'
 

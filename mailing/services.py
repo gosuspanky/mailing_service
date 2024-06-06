@@ -31,6 +31,7 @@ def send_mail_func(mailing):
             Log.objects.create(try_time=NOW, try_status=Log.SUCCESS, server_answer=send_response,
                                mailing=mailing, customers=customer)
         return send_response
+
     except smtplib.SMTPException as e:
         Log.objects.create(try_time=NOW, try_status=Log.FAIL, server_answer=e,
                            mailing=mailing, customers=customer)

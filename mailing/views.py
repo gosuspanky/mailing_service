@@ -1,14 +1,14 @@
 import random
 
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 from customers.models import Customer
 from mailing.models import Mailing, Log
-from django.urls import reverse_lazy
-from mailing.forms import MailingForm, MailingManagerForm
 
-from django.shortcuts import redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from mailing.forms import MailingForm, MailingManagerForm
 
 from mailing.services import get_cashed_article_list
 
