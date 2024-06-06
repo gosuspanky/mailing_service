@@ -8,7 +8,7 @@
 <div class="container">
     {% if not user.is_manager %}
     <div class="btn-group">
-    <a href="{% url 'message:message_create' %}"
+    <a href="{% url 'mail_messages:message_create' %}"
     class="btn btn-block btn-outline-primary">Добавить новое</a>
     </div>
     {% endif %}
@@ -30,7 +30,7 @@
       <td>{{ object.subject}}</td>
       <td>{{ object.text|truncatechars:100}}</td>
       <td>
-          </button><a href="{% url 'message:message_detail' object.pk %}" class="btn btn-outline-warning">Подробнее</a>
+          <a href="{% url 'mail_messages:message_detail' object.pk %}" class="btn btn-outline-warning">Подробнее</a>
       </td>
       </tr>
    </tbody>

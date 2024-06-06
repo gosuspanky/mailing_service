@@ -1,6 +1,10 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">Меню</h5>
     <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="{% url 'mailing:home' %}">Рассылка</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'mailing:home' %}">Главная</a>
+        <a href="{% url 'mail_messages:message_list' %}" class="p-2 btn btn-outline-primary">Сообщения</a>
+        <a href="{% url 'mailing:mailing_list' %}" class="p-2 btn btn-outline-primary">Рассылки</a>
+        <a href="{% url 'mailing:log_list' %}" class="p-2 btn btn-outline-primary">Статистика</a>
+        <a href="{% url 'blog:article_list' %}" class="p-2 btn btn-outline-primary">Блог</a>
     </nav>
 </div>

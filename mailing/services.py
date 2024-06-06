@@ -15,7 +15,7 @@ NOW = datetime.now(MY_TIME_ZONE)
 
 def send_mail_func(mailing):
     """Отправляет письмо на почту клиентам из рассылки, записывает попытки рассылки"""
-    client_emails = mailing.clients.values_list('email', flat=True)
+    customer_emails = mailing.clients.values_list('email', flat=True)
     subject = mailing.message.subject
     text_of_message = mailing.message.text
     try:
@@ -23,18 +23,17 @@ def send_mail_func(mailing):
             subject=subject,
             message=text_of_message,
             from_email=EMAIL_HOST_USER,
-            recipient_list=client_emails,
+            recipient_list=customer_emails,
             fail_silently=False,
         )
-        # Log.objects.create(try_time=NOW, try_status=Log.SUCCESS, server_answer=send_response,
-        #                       mailing=mailing, clients=client)
-        for client in mailing.clients.all():
+
+        for customer in mailing.customers.all():
             Log.objects.create(try_time=NOW, try_status=Log.SUCCESS, server_answer=send_response,
-                               mailing=mailing, clients=client)
+                               mailing=mailing, customers=customer)
         return send_response
     except smtplib.SMTPException as e:
         Log.objects.create(try_time=NOW, try_status=Log.FAIL, server_answer=e,
-                           mailing=mailing, clients=client)
+                           mailing=mailing, customers=customer)
 
 
 def send_mails():
