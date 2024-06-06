@@ -1,5 +1,7 @@
 from django.db import models
 
+from customers.models import Customer
+
 NULLABLE = {'blank': True, 'null': True}
 
 
@@ -31,3 +33,26 @@ class Mailing(models.Model):
     class Meta:
         verbose_name = 'рассылка'
         verbose_name_plural = 'рассылки'
+
+
+class Log(models.Model):
+    """Логи рассылки"""
+    SUCCESS = 'success'
+    FAIL = 'fail'
+
+    STATUSES = (
+        (SUCCESS, 'успешно'),
+        (FAIL, 'не успешно')
+    )
+    mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, verbose_name='рассылка')
+    clients = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True, verbose_name='контакты клиентов')
+    try_time = models.DateTimeField(auto_now_add=True, verbose_name='дата и время последней попытки')
+    try_status = models.CharField(max_length=50, choices=STATUSES, verbose_name='статус попытки')
+    server_answer = models.CharField(max_length=250, null=True, blank=True, verbose_name='ответ почтового сервера')
+
+    def __str__(self):
+        return f'{self.try_time}: {self.try_status}'
+
+    class Meta:
+        verbose_name = 'лог'
+        verbose_name_plural = 'логи'
