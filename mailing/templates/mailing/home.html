@@ -48,7 +48,7 @@
                         <a href="{% url 'mail_messages:message_create' %}"
                            class="btn btn-block btn-outline-primary">Добавить новое</a>
                         {% if not user.is_manager %}
-                        <a href="{% url 'message:message_create' %}"
+                        <a href="{% url 'mail_messages:message_create' %}"
                            class="btn btn-block btn-outline-primary">Добавить новое</a>
                         {% endif %}
                     </div>

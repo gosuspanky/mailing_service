@@ -1,10 +1,12 @@
 import random
 import string
+
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, FormView, ListView
+
 from config import settings
 from config.settings import DEFAULT_FROM_EMAIL
 from mailing.views import ManagerRequiredMixin
