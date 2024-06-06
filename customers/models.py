@@ -10,7 +10,6 @@ class Customer(models.Model):
 
     company_name = models.CharField(max_length=50, verbose_name='имя компании', **NULLABLE)
 
-
     def __str__(self):
         return f'{self.first_name} - {self.email}'
 
