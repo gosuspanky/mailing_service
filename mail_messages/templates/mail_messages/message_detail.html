@@ -20,9 +20,9 @@
                         {{ object.text }}
                     </p>
                      <div class="btn-group">
-                         <a href="{% url 'message:message_edit' object.pk %}"
+                         <a href="{% url 'mail_messages:message_edit' object.pk %}"
                              class="btn btn-sm btn-outline-secondary">Изменить</a>
-                         <a href="{% url 'message:message_delete' object.pk %}"
+                         <a href="{% url 'mail_messages:message_delete' object.pk %}"
                              class="btn btn-sm btn-outline-secondary">Удалить</a>
                     </div>
                 </div>

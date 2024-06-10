@@ -95,6 +95,7 @@ class UserUpdateView(ManagerRequiredMixin, UpdateView):
     form_class = UserStatusForm
     success_url = reverse_lazy('users:user_list')
 
+
 class UserListView(ListView):
     model = User
     paginate_by = 9

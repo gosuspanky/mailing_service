@@ -18,7 +18,7 @@ class OwnerRequiredMixin(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
-        if obj.created_by != request.user:
+        if obj.owner != request.user:
             return redirect('mailing:access_error')
         return super().dispatch(request, *args, **kwargs)
 
@@ -37,7 +37,7 @@ class ManagerOrOwnerRequiredMixin(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
-        if not request.user.is_manager and obj.created_by != request.user:
+        if not request.user.is_manager and obj.owner != request.user:
             return redirect('mailing:access_error')
         return super().dispatch(request, *args, **kwargs)
 
@@ -77,7 +77,7 @@ class MailingListView(ListView):
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset()
         if not self.request.user.is_manager:
-            queryset = queryset.filter(created_by=self.request.user.pk)
+            queryset = queryset.filter(owner=self.request.user.pk)
         return queryset
 
 
