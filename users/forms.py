@@ -10,7 +10,7 @@ class RegisterCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password1', 'password2')
+        fields = ("email", "password1", "password2")
 
 
 class UserProfileForm(UserChangeForm):
@@ -20,18 +20,19 @@ class UserProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'phone', 'avatar')
+        fields = ("email", "first_name", "last_name", "phone", "avatar")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['password'].widget = forms.HiddenInput()
+        self.fields["password"].widget = forms.HiddenInput()
 
 
 class PasswordResetForm(forms.Form):
     """
     Форма для сброса пароля
     """
-    email = forms.EmailField(label='Email')
+
+    email = forms.EmailField(label="Email")
 
 
 class UserStatusForm(UserChangeForm):
@@ -39,8 +40,8 @@ class UserStatusForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('is_active',)
+        fields = ("is_active",)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['password'].widget = forms.HiddenInput()
+        self.fields["password"].widget = forms.HiddenInput()

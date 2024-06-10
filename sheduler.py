@@ -6,5 +6,5 @@ from mailing.services import send_mails
 def start():
     scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), "default")
-    scheduler.add_job(send_mails, 'interval', seconds=30)
+    scheduler.add_job(send_mails, "interval", seconds=30)
     scheduler.start()

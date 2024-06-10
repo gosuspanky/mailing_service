@@ -8,7 +8,13 @@ def make_status(self, request, queryset):
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'email', 'is_active', 'avatar', 'phone',)
+    list_display = (
+        "id",
+        "email",
+        "is_active",
+        "avatar",
+        "phone",
+    )
     actions = [make_status]
 
 
