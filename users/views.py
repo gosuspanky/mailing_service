@@ -33,7 +33,7 @@ class RegisterView(CreateView):
         user.save()
         send_mail(
             "Подтвердите свою почту",
-            f"Ваша учетная запись подтверждена!\nПерейдите по ссылке - http://127.0.0.1:8000/users/verify/{user.id}",
+            f"Ваша учетная запись подтверждена!\nПерейдите по ссылке - http://127.0.0.1:8000/users/verify/{user.pk}",
             settings.EMAIL_HOST_USER,
             [user.email],
             fail_silently=False,

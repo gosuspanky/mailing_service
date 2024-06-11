@@ -24,7 +24,7 @@ class User(AbstractUser):
     )
 
     id = models.IntegerField(
-        primary_key=True, default=0, editable=False, verbose_name="id_клиента"
+        primary_key=True, default=3, editable=False, verbose_name="id_пользователя"
     )
 
     USERNAME_FIELD = "email"

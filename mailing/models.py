@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 from customers.models import Customer
@@ -30,8 +32,8 @@ class Mailing(models.Model):
         ("FINISHED", "Завершена"),
     )
 
-    datetime_start = models.DateTimeField(verbose_name="время начала рассылки")
-    datetime_finish = models.DateTimeField(verbose_name="время окончания рассылки")
+    datetime_start = models.DateTimeField(verbose_name="время начала рассылки", default=datetime.now())
+    datetime_finish = models.DateTimeField(verbose_name="время окончания рассылки", default=datetime.now())
     period = models.CharField(
         max_length=25,
         choices=PERIOD_CHOICES,
