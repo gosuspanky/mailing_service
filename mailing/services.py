@@ -9,7 +9,6 @@ from mailing.models import Mailing, Log
 from blog.models import Article
 from config import settings
 
-
 MY_TIME_ZONE = pytz.timezone(settings.TIME_ZONE)
 NOW = datetime.now(MY_TIME_ZONE)
 
@@ -29,20 +28,24 @@ def send_mail_func(mailing):
         )
         for customer in mailing.customers.all():
             Log.objects.create(try_time=NOW, try_status=Log.SUCCESS, server_answer=send_response,
-                              mailing=mailing, customers=customer)
+                               mailing=mailing, customers=customer)
         return send_response
     except smtplib.SMTPException as e:
         for customer in mailing.customers.all():
             Log.objects.create(try_time=NOW, try_status=Log.FAIL, server_answer=e,
-                              mailing=mailing, customers=customer)
+                               mailing=mailing, customers=customer)
+
 
 def send_mails():
+    MY_TIME_ZONE = pytz.timezone(settings.TIME_ZONE)
+    NOW = datetime.now(MY_TIME_ZONE)
     """Запускает рассылки, меняет их статусы, проверяет периодичность"""
     mailings = (Mailing.objects.filter(status__in=['created', 'started']).filter(datetime_start__lte=NOW).
                 prefetch_related('customers').select_related('messages'))
 
     for mailing in mailings:
         print('прошел по рассылке')
+        print(f'Текущее время:{NOW}')
 
         if mailing.datetime_finish < NOW:
             mailing.status = Mailing.FINISHED
